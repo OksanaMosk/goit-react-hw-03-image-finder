@@ -1,5 +1,5 @@
 // import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
-
+// import axios from 'axios';
 import { Component } from 'react';
 
 import css from './Searchbar.module.css'
@@ -15,9 +15,12 @@ handleChange= ({ target: { value } }) => {
     
     handleSubmit = (e) => {
         e.preventDefault()
-       this.props.handleSearch(this.state.value)
+        this.props.handleSearch(this.state.value)
+  
 }
 
+
+    
     
  render (){
      return (

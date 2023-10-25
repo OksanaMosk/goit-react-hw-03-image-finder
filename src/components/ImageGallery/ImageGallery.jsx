@@ -1,34 +1,59 @@
 import { Component } from 'react';
-import css from './ImageGallery.module.css';
+
 import { fetchPhoto } from '../Services/FetchPhoto';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem'
+
+import css from './ImageGallery.module.css';
+
 
 class ImageGallery extends Component {
     state = {
         photos: null,
+  
     }
-        componentDidUpdate(prevProps, prevState) {
-          
+   
+    
+    
+    componentDidUpdate(prevProps, prevState) {
+
             if (prevProps.searchPhoto !== this.props.searchPhoto) {
                 fetchPhoto(this.props.searchPhoto)
                 .then((response) => response.json())
-                .then((photos) => this.setState({photos: photos.hits}))                   
+                .then((photos) => this.setState({photos: photos.hits}))   
+                                
             }        
           }  
-        
+         
+
+    
     render() {
-        const { photos } = this.state
+        const { photos } = this.state 
         
-            return(<div>
-                <ul className={css.gallery}>
-                    {photos && photos.map((item) => {
-                        return <li key={item.id} className={css.imageItem}>
-                            <a href={item.largeImageURL} className={css.imageGalleryItemImage}>
-                                <img src={item.webformatURL} alt={item.tags} className={css.imageGalleryItem} loading="lazy"/>
-                            </a>
-                        </li>
-})}
-</ul>
-            </div>)
+        return (
+            
+         <div>
+                     <ul className={css.gallery}>
+                    {photos && photos.map((item) => (
+
+
+            <ImageGalleryItem
+                key={item.id}
+                webformatURL={item.webformatURL}
+                largeImageURL={item.largeImageURL}
+                tags={item.tags}
+           />
+                    )
+                    )
+                    }
+                </ul>
+                
+                <div className={css.more}>
+                    <button type="button" className={css.moreButton}>Load more</button>
+                </div>
+
+            </div>
+            
+        )
             
         
     }

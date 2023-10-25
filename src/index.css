@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  color: #212121;
+  color: #8194b1;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,7 +18,7 @@ html {
   box-sizing: border-box;
   width: 100vw;
   overflow-x: hidden;
-  background-color: #5d8178;
+  background-color: #9eb5d8;
 }
 
 *,
@@ -27,8 +27,8 @@ html {
   box-sizing: inherit;
 }
 
-img {
+/* img {
   display: block;
   max-width: 100%;
   height: auto;
-}
+} */
