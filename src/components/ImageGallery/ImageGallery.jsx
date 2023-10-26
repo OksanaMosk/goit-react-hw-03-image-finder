@@ -13,7 +13,8 @@ class ImageGallery extends Component {
     state = {
         photos: null,
         isLoading: false,
-      
+        error: null,
+      status: 'idle',
     }
 
 
@@ -24,7 +25,11 @@ class ImageGallery extends Component {
             this.setState({ isLoading: true})
                 fetchPhoto(this.props.searchPhoto)
                 .then((response) => response.json())
-                .then((photos) => this.setState({photos: photos.hits}))   
+                    .then((photos) => this.setState({ photos: photos.hits, status:'resolved'})) 
+                    .catch((error) => {
+                    this.setState({error, status: 'rejected'})
+                })
+            
                     .finally(() => {
                      this.setState({isLoading: false})
                  })               
@@ -53,8 +58,9 @@ class ImageGallery extends Component {
 
     
     render() {
+        if (this.state.status === 'rejected') return (this.state.error)
         return (
-            
+          
             <div>
              {this.state.isLoading && <Loader />} 
                      <ul className={css.gallery}>
