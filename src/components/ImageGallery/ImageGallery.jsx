@@ -1,19 +1,19 @@
+
+import React from 'react';
 import { Component } from 'react';
-
 import { fetchPhoto } from '../Services/FetchPhoto';
-import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem'
-
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css';
+import Loader from '../Loader/Loader';
 
 
 class ImageGallery extends Component {
     state = {
         photos: null,
-  
+        isLoading: false,
+  error: null,
     }
-   
-    
-    
+
     componentDidUpdate(prevProps, prevState) {
 
             if (prevProps.searchPhoto !== this.props.searchPhoto) {
@@ -23,7 +23,22 @@ class ImageGallery extends Component {
                                 
             }        
           }  
-         
+   
+    fetchPhoto = async () => {
+       try {
+    this.setState({
+        isLoading: true,
+    });
+} catch (error) {
+    this.setState({ error: error.message });
+} finally {
+    this.setState({
+        isLoading: false,
+    })
+} 
+    }
+    
+
 
     
     render() {
@@ -31,9 +46,10 @@ class ImageGallery extends Component {
         
         return (
             
-         <div>
+            <div>
+             {this.setState.isLoading=true && <Loader/>} 
                      <ul className={css.gallery}>
-                    {photos && photos.map((item) => (
+                    {photos !== null && photos.map((item) => (
 
 
             <ImageGalleryItem
