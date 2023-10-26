@@ -14,6 +14,7 @@ const Loader = () => {
   outerCircleColor=""
   innerCircleColor=""
       middleCircleColor=""
+
 />)
 }
 export default Loader;
