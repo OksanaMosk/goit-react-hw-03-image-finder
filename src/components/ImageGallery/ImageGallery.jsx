@@ -2,7 +2,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { fetchPhoto } from '../Services/FetchPhoto';
-
+import ErrorCard from 'components/ErrorCard/ErrorCard';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css';
 import Loader from '../Loader/Loader';
@@ -22,12 +22,12 @@ class ImageGallery extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.searchPhoto !== this.props.searchPhoto) {
-            this.setState({ isLoading: true})
+            this.setState({ status: 'pending' })
                 fetchPhoto(this.props.searchPhoto)
                 .then((response) => response.json())
                     .then((photos) => this.setState({ photos: photos.hits, status:'resolved'})) 
                     .catch((error) => {
-                    this.setState({error, status: 'rejected'})
+                    this.setState({error: error.message, status: 'rejected'})
                 })
             
                     .finally(() => {
@@ -36,35 +36,16 @@ class ImageGallery extends Component {
             }        
           }  
    
-    // fetchPhoto = async () => {
-    //     try {
-    //         this.setState({
-    //             isLoading: true,
-    //         });
-    //         const { data } = await axios.get(fetchPhoto);
-    //         this.setState({
-    //             photos: data,
-    //         })
-    //     } catch (error) {
-    //         this.setState({ error: error.message });
-    //     } finally {
-    //         this.setState({
-    //             isLoading: false,
-    //         });
-    //     }
-    // };
     
-
-
     
     render() {
-        if (this.state.status === 'rejected') return (this.state.error)
-        return (
-          
-            <div>
-             {this.state.isLoading && <Loader />} 
-                     <ul className={css.gallery}>
-                    {this.state.photos !== null && this.state.photos.map((item) => {
+        if (this.state.status === 'pending') return (
+            <div> <Loader /> </div>
+        )
+        if (this.state.status === 'resolved') return (       
+             <div>
+              <ul className={css.gallery}>
+                    {this.state.photos.map((item) => {
                         return (
                             <ImageGalleryItem
                             key={item.id}
@@ -77,17 +58,15 @@ class ImageGallery extends Component {
                     )
                     }
                 </ul>
-                
                 <div className={css.more}>
                     <button type="button" className={css.moreButton}>Load more</button>
                 </div>
+            </div>)
+            
+        else if (this.state.status === 'rejected') return <ErrorCard/>
+      
 
-            </div>
-            
-        )
-            
-        
+   
     }
-
 }
 export default ImageGallery;
