@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 64px;
+  min-height: 80px;
   padding-right: 24px;
   padding-left: 24px;
   padding-top: 12px;
@@ -23,7 +23,7 @@
   width: 100%;
   max-width: 600px;
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -32,6 +32,7 @@
   width: 48px;
   height: 48px;
   border: 0;
+  border-radius: 10px;
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;

@@ -2,15 +2,20 @@ import css from './ImageGalleryItem.module.css'
 
 
 
-const ImageGalleryItem = ({largeImageURL, webformatURL, tags}) => {
-    
+
+  export const ImageGalleryItem = ({
+  tags,
+  webformatURL,
+  largeImageURL,
+  showModal,
+}) => {
     return (
-        <li className={css.imageItem}>
-            <a href={largeImageURL} className={css.imageGalleryItemImage}>
-                <img src={webformatURL} alt="tags"className={css.imageGalleryItem} loading="lazy"  />
-            </a>
+        <li onClick={() => showModal(largeImageURL, tags)} className={css.imageItem}>
+            
+            <div className={css.imageGalleryItemImage}>
+                <img src={webformatURL} alt={tags} className={css.imageGalleryItem} loading="lazy" />
+            </div> 
+
         </li>
     )
 };
-
-export default ImageGalleryItem;

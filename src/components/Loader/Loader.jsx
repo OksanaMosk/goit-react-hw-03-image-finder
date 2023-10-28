@@ -6,14 +6,14 @@ const Loader = () => {
     <ThreeCircles
   height="100"
   width="100"
-  color="#7a8ca7"
+  color="#5a6679"
   wrapperStyle={{}}
   wrapperClass=""
   visible={true}
   ariaLabel="three-circles-rotating"
-  outerCircleColor=""
-  innerCircleColor=""
-      middleCircleColor=""
+  outerCircleColor="#7a8ca7"
+  innerCircleColor="#fff"
+      middleCircleColor="#5a6679"
 
 />)
 }
